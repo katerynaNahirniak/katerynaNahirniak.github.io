@@ -22,6 +22,12 @@ body {
     padding: 20px 30px;
     margin-bottom: 25px;
 }
+.row {
+    text-align: left;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+  }  
 h1 {
     text-align: center;
     color: #165327;
@@ -29,7 +35,6 @@ h1 {
     font-size: 2em;
     text-transform: uppercase;
 }
-
 h2 {
     color: #165327;
     border-bottom: 2px solid #165327;
@@ -37,34 +42,28 @@ h2 {
     font-size: 1.3em;
     text-transform: uppercase;
 }
-
 .section p {
     font-size: 1em;
     margin: 8px 0;
     color: #333;
 }
-
 a {
     color: #165327;
     text-decoration: none;
 }
-
 a:hover {
     text-decoration: underline;
 }
-
 ul {
     margin-top: 8px;
     padding-left: 20px;
 }
-
 li {
     margin-bottom: 6px;
 }
 .columns{
     display: flex;
-    justify-content: space-between;
-    
+    justify-content: space-between;   
 }
 .columns p {
     padding: 10px;

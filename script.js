@@ -1,4 +1,5 @@
 function runSubjects() {
+     alert("Button works!"); /
     let numSubjects = parseInt(prompt("How many subjects do you have?"));
     
     // validate

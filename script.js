@@ -1,93 +1,46 @@
-// buttons
-var buttons = document.querySelectorAll(".rps");
+function subjects() {
+    let numSubjects = parseInt(prompt("How many subjects do you have?"));
+    
+    // validate
+    while (isNaN(numSubjects) || numSubjects <= 0) {
+        numSubjects = parseInt(prompt("Please enter a valid number of subjects:"));
+    }
 
+    const results = [];
+    let sum = 0;
 
-buttons.forEach(function(button) {
-    button.onclick = function() {
-        var player = button.textContent.toLowerCase();
+    // input results
+    for (let i = 0; i < numSubjects; i++) {
+        let mark = parseInt(prompt(`Enter mark for subject ${i + 1} (0–100):`));
 
-        // computer option
-        var options = ["rock", "paper", "scissors"];
-        var computer = options[Math.floor(Math.random() * 3)];
-
-        var message = "You chose " + player + ". Computer chose " + computer + ". ";
-
-        // rules of the game
-        if (player === computer) {
-            message += "It's a tie!";
-        } else if ( (player === "rock" && computer === "scissors") || (player === "paper" && computer === "rock") || (player === "scissors" && computer === "paper")) {
-            message += "You win!";
-        } else {
-            message += "You lose!";
+        // validate mark
+        while (isNaN(mark) || mark < 0 || mark > 100) {
+            mark = parseInt(prompt(`Invalid! Enter mark for subject ${i + 1} (0–100):`));
         }
 
-        alert(message);
-    }
-});
-function computeLyrics() {
-    let lyrics = "";
-
-    for (let i = 99; i >= 0; i--) {
-        if (i > 1) {
-            lyrics += `${i} bottles of beer on the wall, ${i} bottles of beer.<br>`;
-            lyrics += `Take one down and pass it around, ${i - 1} bottles of beer on the wall.<br><br>`;
-        } else if (i === 1) {
-            lyrics += `1 bottle of beer on the wall, 1 bottle of beer.<br>`;
-            lyrics += `Take one down and pass it around, no more bottles of beer on the wall.<br><br>`;
-        } else {
-            lyrics += `No more bottles of beer on the wall, no more bottles of beer.<br>`;
-            lyrics += `Go to the store and buy some more, 99 bottles of beer on the wall.<br>`;
-        }
+        results[i] = mark;
+        sum += mark;
     }
 
-    document.getElementById("output").innerHTML = lyrics;
-   
-}
-computeLyrics();  
+    // compute average
+    const average = sum / numSubjects;
 
-
-function getSubjects() {
-    // Ask how many subjects
-    let numSubjects = parseInt(prompt("How many subjects do you take?"));
-
-    let marks = [];
-    let total = 0;
-
-    // Get marks for each subject
-    for (let i = 1; i <= numSubjects; i++) {
-        let mark = parseInt(prompt("Enter mark for subject " + i + ":"));
-
-        marks.push(mark);
-        total += mark;
+    // determine grade function
+    function getGrade(mark) {
+        if (mark >= 70) return "A";
+        else if (mark >= 60) return "B";
+        else if (mark >= 50) return "C";
+        else if (mark >= 40) return "D";
+        else return "F";
     }
 
-    // Calculate average
-    let average = total / numSubjects;
-    let grade = computeGrade(average);
+    // build output message
+    let message = "Results:\n\n";
+    for (let i = 0; i < numSubjects; i++) {
+        message += `Subject ${i + 1}: ${results[i]}% — Grade: ${getGrade(results[i])}\n`;
+    }
 
-    // Output results
-    let resultHTML = `<h3>Your Results</h3>`;
-    resultHTML += `<p>Marks: ${marks.join(", ")}</p>`;
+    message += `\nOverall Average: ${average.toFixed(2)}%`;
 
-    resultHTML += `<p>Your Grade: <strong>${grade}</strong></p>`;
-
-    document.getElementById("gradesOutput").innerHTML = resultHTML;
-}
-
-function computeGrade(result) {
-    if (result >= 70) {
-        return 'A';
-    }
-    else if (result >= 60) {
-        return 'B';
-    }
-    else if (result >= 50) {
-        return 'C';
-    }
-    else if (result >= 40) {
-        return 'D';
-    }
-    else {
-        return 'F';
-    }
+    alert(message);
 }

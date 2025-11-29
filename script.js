@@ -1,4 +1,3 @@
-alert("File loaded!");
 function runSubjects() {
     let numSubjects = parseInt(prompt("How many subjects do you have?"));
     
